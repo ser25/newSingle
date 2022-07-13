@@ -41,15 +41,16 @@ h6 {
 html,
 body {
   height: 100%;
-  line-height: 1.6;
-  font-size: 16px;
-  color: #1A0A03;
-  font-weight: 400;
+  line-height: 1.5;
+  background: #1A0A03;
+  font-weight: 600;
+  font-size: 18px;
+  color: #FFFFFF;
   font-family: "Poppins", sans-serif;
 }
 
 [class*="__container"] {
-  max-width: 1179px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -60,16 +61,61 @@ body {
   display: inline-block;
   font-weight: 500;
   font-size: 18px;
-  color: #FFFFFF;
   min-width: 59px;
-  background-color: #EE5514;
   padding: 15px 30px;
   text-align: center;
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
 
-.button:hover {
-  color: #EE5514;
-  background-color: #FFFFFF;
+/*-----------------------------------------header----------------------------------------------------------------------------*/
+.header__container {
+  min-height: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.header__logo {
+  margin-right: 15px;
+}
+
+.header__logo_1 {
+  margin-top: 12.5px;
+  margin-left: 20px;
+}
+
+@media (max-width: 909.97px) {
+  .header__logo_1 {
+    display: none;
+  }
+}
+
+.header__menu {
+  width: 625px;
+}
+
+.menu__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.menu__link {
+  display: inline-block;
+  color: #FFFFFF;
+  -webkit-transition: color 0.3s ease 0s;
+  transition: color 0.3s ease 0s;
+}
+
+.menu__link:hover {
+  color: #7A66CC;
 }

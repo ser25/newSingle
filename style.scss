@@ -34,11 +34,10 @@ h6{
 
 /*-------------------------------------------variables------------------------------------------------------------------------*/
 
-$maxWidth: 1170;
-$Orange: #EE5514;
+$maxWidth: 1140;
+$Purple: #7A66CC;
 $Black: #1A0A03;
 $White: #FFFFFF;
-$SourceSerifPro: 'Source Serif Pro', serif;
 $Poppins: 'Poppins', sans-serif;
 
 
@@ -46,16 +45,16 @@ $Poppins: 'Poppins', sans-serif;
 html,
 body{
     height: 100%;
-    line-height: 1.6;
-    //background: #FFFFFF; //для теми
-    font-size: 16px;
-    color: $Black;
-    font-weight: 400;
+    line-height: 1.5;
+    background: $Black; //для теми
+    font-weight: 600;
+    font-size: 18px;
+    color: $White;
     font-family: $Poppins;
     
 }
 [class*="__container"]{
-    max-width: 1179px;
+    max-width: 1140px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -69,15 +68,64 @@ body{
     display: inline-block;
     font-weight: 500;
     font-size: 18px;
-    color: $White;
+    //color: $White;
+    //background-color: $White;
     min-width: 59px;
-    background-color: $Orange;
     padding: 15px 30px;
     text-align: center;
     transition: all 0.3s ease 0s;
     &:hover{
-        color: $Orange;
-        background-color: $White;
+        //color: $Orange;
+        //background-color: $White;
+    }
+}
+/*-----------------------------------------header----------------------------------------------------------------------------*/
+.header {
+
+    &__container {
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    &__logo {
+        margin-right: 15px;
+        &_1{
+            margin-top: 12.5px;
+            margin-left: 20px;
+            @media (max-width: 909.97px){
+                display: none;
+            }
+        }
+    }
+
+    &__menu {
+        width: 625px;
+    }
+}
+.menu {
+
+    &__nav-bar {
+        
+    }
+
+    &__list {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    &__item {
+    }
+
+    &__link {
+        display: inline-block;
+        color: $White;
+        transition: color 0.3s ease 0s;;
+        &:hover{
+           color: $Purple;
+        }
     }
 }
 
