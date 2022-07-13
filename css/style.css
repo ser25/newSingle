@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+}
+
+/*-------------------------------------------variables------------------------------------------------------------------------*/
+html,
+body {
+  height: 100%;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #1A0A03;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
+
+[class*="__container"] {
+  max-width: 1179px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/*-------------------------------adaptivValue----------------------------------------------------------------------*/
+/*-------------------------------------------------BEM--------------------------------------------------------------------*/
+.button {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #FFFFFF;
+  min-width: 59px;
+  background-color: #EE5514;
+  padding: 15px 30px;
+  text-align: center;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.button:hover {
+  color: #EE5514;
+  background-color: #FFFFFF;
+}

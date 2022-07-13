@@ -1,0 +1,83 @@
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+ul,
+ol,
+li{
+    list-style: none;
+}
+img{
+    vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    font-weight: inherit;
+    font-size: inherit;
+}
+.wrapper{
+    min-height: 100%;
+    overflow: hidden;
+}
+
+/*-------------------------------------------variables------------------------------------------------------------------------*/
+
+$maxWidth: 1170;
+$Orange: #EE5514;
+$Black: #1A0A03;
+$White: #FFFFFF;
+$SourceSerifPro: 'Source Serif Pro', serif;
+$Poppins: 'Poppins', sans-serif;
+
+
+
+html,
+body{
+    height: 100%;
+    line-height: 1.6;
+    //background: #FFFFFF; //для теми
+    font-size: 16px;
+    color: $Black;
+    font-weight: 400;
+    font-family: $Poppins;
+    
+}
+[class*="__container"]{
+    max-width: 1179px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+/*-------------------------------adaptivValue----------------------------------------------------------------------*/                                 
+@mixin adaptivValue ($property, $stratSize, $miniSize){
+    $addSize: $stratSize - $miniSize;
+    #{$property}: calc(#{$miniSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+}
+/*-------------------------------------------------BEM--------------------------------------------------------------------*/
+.button{
+    display: inline-block;
+    font-weight: 500;
+    font-size: 18px;
+    color: $White;
+    min-width: 59px;
+    background-color: $Orange;
+    padding: 15px 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    &:hover{
+        color: $Orange;
+        background-color: $White;
+    }
+}
+
