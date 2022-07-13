@@ -35,6 +35,13 @@ h6 {
 .wrapper {
   min-height: 100%;
   overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 /*-------------------------------------------variables------------------------------------------------------------------------*/
@@ -118,4 +125,60 @@ body {
 
 .menu__link:hover {
   color: #7A66CC;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------*/
+.newSingle__title {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.5;
+  padding-top: 412px;
+  margin-bottom: 10px;
+}
+
+.newSingle__songName {
+  font-weight: 700;
+  font-size: 100px;
+  line-height: 1.5;
+  color: transparent;
+  -webkit-text-stroke: 1px white;
+  text-stroke: 1px white;
+  margin-bottom: 50px;
+}
+
+.newSingle__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.newSingle__playPause img {
+  width: 25px;
+  height: 22px;
+}
+
+.newSingle__bar {
+  width: 888px;
+  height: 2px;
+  background-color: aqua;
+  border-radius: 5px;
+}
+
+.bar__progress {
+  background-color: #7A66CC;
+  border-radius: 5px;
+  height: 2px;
+  width: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }

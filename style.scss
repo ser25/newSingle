@@ -30,6 +30,8 @@ h6{
 .wrapper{
     min-height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 /*-------------------------------------------variables------------------------------------------------------------------------*/
@@ -128,4 +130,68 @@ body{
         }
     }
 }
+/*---------------------------------------------------------------------------------------------------------------------*/
+.page {
 
+    &__newSingle {
+    }
+}
+.newSingle {
+
+    &__container {
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 72/48 *1;
+        padding-top: 412px;
+        margin-bottom: 10px;
+    }
+
+    &__songName {
+        font-weight: 700;
+        font-size: 100px;
+        line-height: 150/100 *1;
+        color: transparent;
+        -webkit-text-stroke: 1px white;
+        text-stroke: 1px white;
+        margin-bottom: 50px;
+    }
+
+    &__body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__playPause {
+
+        img{
+            width: 25px;
+            height: 22px;
+        }
+    }
+
+    &__bar {
+        width: 888px;
+        height: 2px;
+        background-color: aqua;
+        border-radius: 5px;
+        //align-self: center;
+    }
+
+    &__time {
+    }
+}
+.bar {
+
+    &__progress {
+        background-color: $Purple;
+        border-radius: 5px;
+        height: 2px;
+        width: 150px;
+        display: flex;
+        align-items: center;
+    }
+}
