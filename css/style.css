@@ -76,6 +76,14 @@ body {
 }
 
 /*-----------------------------------------header----------------------------------------------------------------------------*/
+.header {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
 .header__container {
   min-height: 120px;
   display: -webkit-box;
@@ -114,6 +122,8 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .menu__link {
@@ -127,13 +137,40 @@ body {
   color: #7A66CC;
 }
 
-/*---------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------newSingle-------------------------------------------------------------------------*/
+.newSingle {
+  position: relative;
+}
+
+.newSingle__image img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.newSingle__container {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 279px;
+}
+
 .newSingle__title {
   font-weight: 700;
   font-size: 48px;
   line-height: 1.5;
   padding-top: 412px;
   margin-bottom: 10px;
+}
+
+@media (max-width: 999.97px) {
+  .newSingle__title {
+    padding-top: calc(130px + 282 * ((100vw - 320px) / 820));
+    font-size: calc(24px + 24 * ((100vw - 320px) / 820));
+  }
 }
 
 .newSingle__songName {
@@ -146,35 +183,105 @@ body {
   margin-bottom: 50px;
 }
 
+@media (max-width: 999.97px) {
+  .newSingle__songName {
+    font-size: calc(50px + 50 * ((100vw - 320px) / 820));
+    margin-bottom: calc(20px + 30 * ((100vw - 320px) / 820));
+  }
+}
+
 .newSingle__body {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (min-width: 1100px) {
+  .newSingle__body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media (max-width: 999.97px) {
+  .newSingle__playPause_1 {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+  }
+}
+
+@media (max-width: 999.97px) {
+  .newSingle__playPause {
+    -ms-grid-column-align: center;
+        justify-self: center;
+  }
 }
 
 .newSingle__playPause img {
   width: 25px;
-  height: 22px;
 }
 
 .newSingle__bar {
   width: 888px;
-  height: 2px;
+  height: 6px;
   background-color: aqua;
   border-radius: 5px;
+}
+
+@media (max-width: 999.97px) {
+  .newSingle__bar {
+    width: calc(300px + 588 * ((100vw - 320px) / 820));
+  }
+}
+
+@media (max-width: 999.97px) {
+  .newSingle__time_3 {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+}
+
+@media (min-width: 1000px) {
+  .newSingle__time {
+    width: 122px;
+  }
+}
+
+@media (max-width: 999.97px) {
+  .newSingle__time {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media (max-width: 999.97px) {
+  .bar_2 {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
 }
 
 .bar__progress {
   background-color: #7A66CC;
   border-radius: 5px;
-  height: 2px;
-  width: 150px;
+  height: 6px;
+  width: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -182,3 +289,11 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
+@media (max-width: 999.97px) {
+  .time3 {
+    display: none;
+  }
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------*/
