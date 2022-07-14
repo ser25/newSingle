@@ -156,6 +156,7 @@ body{
             top: 0;
             left: 0;
             object-fit: cover;
+
         }
     }
 
@@ -163,6 +164,9 @@ body{
         position: relative;
         z-index: 2;
         padding-bottom: 279px;
+        @media (max-width: 999.97px){
+            @include adaptivValue(padding-bottom, 279 , 200 );
+        }    
     }
 
     &__title {
@@ -186,7 +190,7 @@ body{
         -webkit-text-stroke: 1px white;
         text-stroke: 1px white;
         margin-bottom: 50px;
-        @media (max-width: 999.97px){
+        @media (max-width: 1099.97px){
             @include adaptivValue(font-size, 100 , 50 );
             @include adaptivValue( margin-bottom, 50 , 20 );
         }
@@ -200,16 +204,17 @@ body{
         }
         display: grid;
         justify-content: center;
+        gap: 10px;
 
     }
 
     &__playPause {
         &_1{
-            @media (max-width: 999.97px){
+            @media (max-width: 1099.97px){
                 order: 3;
             }
         }
-        @media (max-width: 999.97px){
+        @media (max-width: 1099.97px){
             justify-self: center;
         }
 
@@ -225,23 +230,23 @@ body{
         background-color: aqua;
         border-radius: 5px;
         //align-self: center;
-        @media (max-width: 999.97px){
-            @include adaptivValue(width, 888 , 300 );
+        @media (max-width: 1099.97px){
+            @include adaptivValue(width, 888 , 290 );
         }
     }
 
     &__time {
         &_3{
-            @media (max-width: 999.97px){
+            @media (max-width: 1099.97px){
                 order: 2;
             }
         }
 
-        @media (min-width:1000px){
+        @media (min-width:1100px){
             width: 122px;  
         }
 
-        @media (max-width: 999.97px){
+        @media (max-width: 1099.97px){
             display: flex;
             justify-content: space-between;
         }
@@ -249,7 +254,7 @@ body{
 }
 .bar {
     &_2{
-        @media (max-width: 999.97px){
+        @media (max-width: 1099.97px){
             order: 1;
         }
     }
@@ -264,11 +269,69 @@ body{
     }
 }
 .time3{
-    @media (max-width: 999.97px){
+    @media (max-width: 1099.97px){
         display: none;
     }
 }
-/*--------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------advantage----------------------------------------------------------------------------------------*/
+.page {
+
+    &__advantage {
+        margin-top: -149px;
+        position: relative;
+        z-index: 2;
+    }
+}
+.advantage {
+
+    &__container {
+        padding-bottom: 179px;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 30px;
+    }
+
+    &__item {
+        position: relative;
+    }
+}
+.item-advantage {
+
+    &__image {
+        position: relative;
+        padding: 0 0 85.71528% 0;
+        img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+
+    }
+
+    &__body {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        left: 0;
+        background-color: $Purple;
+        opacity: 0.7;
+        border-radius: 20px 0px;
+        width: 100%;
+    }
+
+    &__text {
+        padding: 21px 0 21px 20px;
+        font-weight: 500;
+        font-size: 16px;
+    }
+}
 
 
 
