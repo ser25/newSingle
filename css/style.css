@@ -792,3 +792,42 @@ body {
 .item-follows__link:hover path {
   fill: #7A66CC;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------------------*/
+.gallery__container {
+  padding-bottom: 180px;
+}
+
+.gallery__grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(255px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  -ms-grid-rows: (minmax(255px, 1fr))[auto-fit];
+      grid-template-rows: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 30px;
+}
+
+.gallery__item_big {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .gallery__item_big {
+    grid-row: span 2;
+    display: block;
+  }
+}
+
+@media (min-width: 600px) {
+  .gallery__item_colunm {
+    grid-column: span 2;
+  }
+}
+
+.gallery__item img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
