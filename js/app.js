@@ -1,5 +1,5 @@
-const player = document.querySelector('.newSingle__body');
-const playBtn = document.querySelector('.plays');
+const players = document.querySelectorAll('.bodySingle');
+const playBtn = document.querySelectorAll('.plays');
 const audio = document.querySelector('.newSingle__song');
 const progressContainer = document.querySelector('.newSingle__bar ');
 const progress = document.querySelector('.bar__progress');
@@ -27,16 +27,27 @@ function loadSong(song) {
 }  
 loadSong(songsArray[songIndex]);
 //Play
-function playSong() {
-    player.classList.add('_play');
-    audio.play();
-    imgSrc.src = `images/newSingl/pause-solid.svg`;
+function playSong(body) {
+    players.forEach(item => {
+        let necessaryPlayer = item.querySelector('._is');
+        if (necessaryPlayer) {
+            item.classList.add('._play');
+            audio.play();
+           // playBtn.innerHTML = "pause";
+        }
+    });
+
 }
 //Pause
-function pauseSong() {
-    player.classList.remove('_play');
-    audio.pause();
-    imgSrc.src = `images/newSingl/play-solid.svg`;
+function pauseSong(item) {
+    let necessaryPlayer = item.querySelector('._is');
+    if (necessaryPlayer) {
+        item.classList.remove('._play');
+        audio.pause();
+        //playBtn.innerHTML = "play";
+    }
+
+
 }
 
 
@@ -116,7 +127,7 @@ function infinity() {
 
 audio.addEventListener('ended', nextSong);
 
-playBtn.addEventListener('click', () => {
+/*playBtn.addEventListener('click', () => {
     const isPlaying = player.classList.contains('_play');
     if (isPlaying) {
         pauseSong();
@@ -124,4 +135,36 @@ playBtn.addEventListener('click', () => {
     } else {
         playSong();
     }
-});
+});*/
+//Запуск через кнопку
+/*playBtn.forEach(function(item){
+    item.addEventListener('click', () => {
+        let isPlayings = player;
+        isPlayings.forEach( item => {
+            let isPlaying = item.classList.contains('_play');
+            console.log(item);
+            if (isPlaying) {
+                pauseSong(item);
+               
+            } else {
+                playSong(item);
+            }
+        })
+        
+    });
+});*/
+playBtn.forEach(function(item){
+    item.addEventListener('click', () => {
+        let body = item.classList.contains('_play');
+        item.classList.add('_is');
+        alert(body);
+        //alert(body);
+        if (body) {
+            pauseSong(body);
+           
+        } else {
+            playSong(body);
+        }
+
+    });
+});    
