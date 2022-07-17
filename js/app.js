@@ -8,13 +8,13 @@ const cover = document.querySelector('.player__img');
 const imgSrcs = document.querySelectorAll('.Play');
 const time = document.querySelector('.time1');
 const timeFull = document.querySelector('.time2');
-const body = document.querySelector('.newSingle__body');
+const nextBtn = document.querySelector('.playPause__item_2');
 //Назви пісень
 const songsArray = ['Let me down slowly',
                      'Summertime Sadness',
                       'Another love',
                       'Bad Habits',
-                      'Don`t Call Me Angle',
+                      'Don’t Call Me Angel',
                       'la di die'
                     ];
 //Пісня по умолчанію
@@ -28,24 +28,27 @@ function loadSong(song) {
 loadSong(songsArray[songIndex]);
 //Play
 function playSong(item) {
-
            // item.classList.add('._play');
             audio.play();
-            console.log(item);
             /*imgSrcs.forEach(item => {
                 item.src = `/images/newSingl/pause-solid.svg`;
             });*/
-
             //imgSrcs.src = `/images/newSingl/pause-solid.svg`;
-            let imageScr = item.querySelector('.Play');
-            imageScr.src = `/images/newSingl/pause-solid.svg`;
+            if (!(item === undefined)) {
+                let imageScr = item.querySelector('.Play');
+                imageScr.src = `/images/newSingl/pause-solid.svg`;
+            }
+
 }
 //Pause
 function pauseSong(item) {
     //item.classList.remove('._play');
     audio.pause();
-    let imageScr = item.querySelector('.Play');
-    imageScr.src = `/images/newSingl/play-solid.svg`;
+    if (!(item === undefined)) {
+        let imageScr = item.querySelector('.Play');
+        imageScr.src = `/images/newSingl/play-solid.svg`;
+    }
+
     
 }
 
@@ -58,7 +61,10 @@ function nextSong() {
     loadSong(songsArray[songIndex]);
     playSong();
 }
-//nextBtn.addEventListener('click', nextSong);
+/*nextBtn.forEach(item => {
+    item.addEventListener('click', nextSong);
+})*/
+nextBtn.addEventListener('click', nextSong);
 
 function prevSong() {
     songIndex--;
