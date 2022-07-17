@@ -28,26 +28,17 @@ function loadSong(song) {
 loadSong(songsArray[songIndex]);
 //Play
 function playSong(body) {
-    players.forEach(item => {
-        let necessaryPlayer = item.querySelector('._is');
-        if (necessaryPlayer) {
-            item.classList.add('._play');
+
+           // item.classList.add('._play');
             audio.play();
            // playBtn.innerHTML = "pause";
-        }
-    });
 
 }
 //Pause
-function pauseSong(item) {
-    let necessaryPlayer = item.querySelector('._is');
-    if (necessaryPlayer) {
-        item.classList.remove('._play');
-        audio.pause();
-        //playBtn.innerHTML = "play";
-    }
-
-
+function pauseSong() {
+    //item.classList.remove('._play');
+    audio.pause();
+    //playBtn.innerHTML = "play";
 }
 
 
@@ -155,15 +146,14 @@ audio.addEventListener('ended', nextSong);
 });*/
 playBtn.forEach(function(item){
     item.addEventListener('click', () => {
-        let body = item.classList.contains('_play');
-        item.classList.add('_is');
-        alert(body);
-        //alert(body);
-        if (body) {
-            pauseSong(body);
+        let necessaryBtn = item.classList.toggle('_is');
+        if (necessaryBtn) {
+            //pauseSong();
+            playSong();
            
         } else {
-            playSong(body);
+           // playSong();
+            pauseSong();
         }
 
     });
