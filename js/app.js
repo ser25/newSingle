@@ -36,11 +36,6 @@ loadSong(songsArray[songIndex]);
 //Play
 function playSong(item) {
     console.log(`item: ${item}`);
-    /*let isPlayer1 = item.closest('.newSingle__body');
-    let isPlayer2 = item.closest('.LastTracke__body');
-    console.log(`1: ${isPlayer1}`);
-    console.log(`2: ${isPlayer2}`);*/
-
            // item.classList.add('._play');
             audio.play();
             /*imgSrcs.forEach(item => {
