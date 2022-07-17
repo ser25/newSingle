@@ -616,7 +616,7 @@ body{
     }
 
     &__playPause {
-        width: 22px;
+
     }
 
     &__bar {
@@ -633,7 +633,7 @@ body{
 .LastTracke {
 
     &__playPause {
-        justify-self: center;
+
         &_1 {
             @media (max-width: 1099.97px){
                 order: 3;
@@ -749,6 +749,42 @@ body{
         }
     }
 }
+.LastTracke {
+
+    &__playPause {
+
+        &_1 {
+        }
+    }
+}
+.playPause {
+    @media (max-width: 1099.97px){
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+
+    &__item {
+        &_1{
+            transform: rotate(180deg);
+            @media (min-width: 1100px){
+                display: none;      
+            }
+            display: block;
+        }
+        &_2{
+            @media (min-width: 1100px){
+                display: none;      
+            }
+            display: block;
+        }
+        img{
+            width: 22px;
+        }
+    }
+}
+
 
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 .page {

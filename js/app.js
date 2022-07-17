@@ -1,5 +1,5 @@
 const player = document.querySelector('.newSingle__body');
-const playBtn = document.querySelector('.newSingle__playPause');
+const playBtn = document.querySelector('.plays');
 const audio = document.querySelector('.newSingle__song');
 const progressContainer = document.querySelector('.newSingle__bar ');
 const progress = document.querySelector('.bar__progress');
@@ -12,7 +12,10 @@ const body = document.querySelector('.newSingle__body');
 //Назви пісень
 const songsArray = ['Let me down slowly',
                      'Summertime Sadness',
-                      'Another love'
+                      'Another love',
+                      'Bad Habits',
+                      'Don`t Call Me Angle',
+                      'la di die'
                     ];
 //Пісня по умолчанію
 let songIndex = 0;
