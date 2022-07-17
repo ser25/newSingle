@@ -5,7 +5,7 @@ const progressContainer = document.querySelector('.newSingle__bar ');
 const progress = document.querySelector('.bar__progress');
 const title = document.querySelector('.newSingle__songName');
 const cover = document.querySelector('.player__img');
-const imgSrc = document.querySelector('.Play');
+const imgSrcs = document.querySelectorAll('.Play');
 const time = document.querySelector('.time1');
 const timeFull = document.querySelector('.time2');
 const body = document.querySelector('.newSingle__body');
@@ -27,18 +27,26 @@ function loadSong(song) {
 }  
 loadSong(songsArray[songIndex]);
 //Play
-function playSong(body) {
+function playSong(item) {
 
            // item.classList.add('._play');
             audio.play();
-           // playBtn.innerHTML = "pause";
+            console.log(item);
+            /*imgSrcs.forEach(item => {
+                item.src = `/images/newSingl/pause-solid.svg`;
+            });*/
 
+            //imgSrcs.src = `/images/newSingl/pause-solid.svg`;
+            let imageScr = item.querySelector('.Play');
+            imageScr.src = `/images/newSingl/pause-solid.svg`;
 }
 //Pause
-function pauseSong() {
+function pauseSong(item) {
     //item.classList.remove('._play');
     audio.pause();
-    //playBtn.innerHTML = "play";
+    let imageScr = item.querySelector('.Play');
+    imageScr.src = `/images/newSingl/play-solid.svg`;
+    
 }
 
 
@@ -147,13 +155,14 @@ audio.addEventListener('ended', nextSong);
 playBtn.forEach(function(item){
     item.addEventListener('click', () => {
         let necessaryBtn = item.classList.toggle('_is');
+        //let ne = item;
         if (necessaryBtn) {
             //pauseSong();
-            playSong();
+            playSong(item);
            
         } else {
            // playSong();
-            pauseSong();
+            pauseSong(item);
         }
 
     });
