@@ -20,85 +20,115 @@ const songsArray = ['Let me down slowly',
                       'Bad Habits',
                       'Don’t Call Me Angel',
                       'la di die'
-                    ];
-                    const songsArrayNewSingl = ['Let me down slowly',
-                   ];                  
+                    ];                
+
+ function necessaryData(){
+
+    let isPlayer = item.closest('.plays');
+    isPlayer = isPlayer.closest('.LastTracke__body') || isPlayer.closest('.newSingle__body');
+    if(isPlayer === player1 ){
+        // player1
+        let audio = audio1;
+        console.log(audio);
+        //playSong(item, audio);
+        return audio
+
+    } else if (isPlayer === player2) {
+        // player2
+        let audio = audio2;
+        return audio
+    }
+    
+
+}
+
 //Пісня по умолчанію
 let songIndex = 0;
-//init 
-console.log(audio)
+//Init
 function loadSong(song) {
     title.innerHTML = song;
     audio.src = `music/${song}.mp3`;
 }  
-loadSong(songsArrayNewSingl[songIndex]);
 loadSong(songsArray[songIndex]);
 //Play
 function playSong(item) {
-    console.log(`item: ${item}`);
-           // item.classList.add('._play');
-            audio.play();
-            /*imgSrcs.forEach(item => {
-                item.src = `/images/newSingl/pause-solid.svg`;
-            });*/
-            //imgSrcs.src = `/images/newSingl/pause-solid.svg`;
-            if (!(item === undefined)) {
-                let imageScr = item.querySelector('.Play');
-                imageScr.src = `/images/newSingl/pause-solid.svg`; 
-            };
-    /*playBtn.forEach(play => {
-
-    })      
-    player.classList.add('_play');
-    audio.play();    */    
+    /*audio.play();
+    if (!(item === undefined)) {
+        let imageScr = item.querySelector('.Play');
+        imageScr.src = `images/newSingl/pause-solid.svg`; 
+    };*/
+    let necessaryPlayer1 = player1.classList.contains('_is');
+    let necessaryPlayer2 = player2.classList.contains('_is');
+    if (necessaryPlayer1) {
+        player1.classList.add('_play');
+        audio1.play();
+    } else if(necessaryPlayer2){
+        player2.classList.add('_play');
+        audio2.play();
+    }
 
 }
 //Pause
 function pauseSong(item) {
-    //item.classList.remove('._play');
+   /* //item.classList.remove('._play');
     audio.pause();
     if (!(item === undefined)) {
         let imageScr = item.querySelector('.Play');
-        imageScr.src = `/images/newSingl/play-solid.svg`;
+        imageScr.src = `images/newSingl/play-solid.svg`;
+    }*/
+    let necessaryPlayer1 = player1.classList.contains('_is');
+    let necessaryPlayer2 = player2.classList.contains('_is');
+    if (necessaryPlayer1) {
+        player1.classList.remove('_play');
+        player1.classList.remove('_is');
+        audio1.pause();
+    } else if(necessaryPlayer2){
+        player2.classList.remove('_play');
+        player2.classList.remove('_is');
+        audio2.pause();
     }
 }
+//Start
 playBtn.forEach(function(item){
     item.addEventListener('click', () => {
-        /*let isPlayer1 = item.closest('.newSingle__body');
-        let isPlayer2 = item.closest('.LastTracke__body');
-        if(isPlayer1) {
-            const isPlaying = isPlayer1.classList.add('_play1');
-            console.log(`1: ${isPlaying}`);
-            
-        } else if(isPlayer2) {
-            const isPlaying = isPlayer2.classList.add('_play2');
-            console.log(`2: ${isPlaying}`);
-        }*/
-        let necessaryBtn = item.classList.toggle('_is'); // цвідци прац
-        //let ne = item;
+       /* let necessaryBtn = item.classList.toggle('_is'); 
         if (necessaryBtn) {
-            //pauseSong();
             playSong(item);
         } else {
-           // playSong();
             pauseSong(item);
+        }*/
+        let isPlayer = item.closest('.LastTracke__body') || item.closest('.newSingle__body');
+        //isPlayer = isPlayer.closest('.LastTracke__body') || isPlayer.closest('.newSingle__body');
+        let isPlaying = isPlayer.classList.contains('_play');
+        let necessaryBtn = isPlayer.classList.add('_is');
+        console.log(isPlayer);
+        if (isPlaying) {
+            pauseSong();
+        } else {
+            playSong();
         }
     });
 });
 
 
 function nextSong() {
-    songIndex++;
+    /*songIndex++;
     if (songIndex > songsArray.length - 1){
         songIndex = 0;
     }
     loadSong(songsArray[songIndex]);
     let weq = player2.querySelector('.Play')
     console.log(weq);
-    audio.play();
-    weq.src = `/images/newSingl/pause-solid.svg`;
+    audio2.play
+    weq.src = `images/newSingl/pause-solid.svg`;
     let qws = player2.querySelector('.plays')
-    let qwws = qws.classList.add('_is')
+    //let qwws = qws.classList.add('_is')*/
+    songIndex++;
+    if (songIndex > songsArray.length - 1){
+        songIndex = 0;
+    }
+    loadSong(songsArray[songIndex]);
+    playSong();
 
 }
 nextBtn.addEventListener('click', nextSong);
@@ -112,16 +142,14 @@ function prevSong() {
     let weq = player2.querySelector('.Play')
     console.log(weq);
     audio.play();
-    weq.src = `/images/newSingl/pause-solid.svg`;
+    weq.src = `images/newSingl/pause-solid.svg`;
     let qws = player2.querySelector('.plays')
-    let qwws = qws.classList.add('_is')
+    //let qwws = qws.classList.add('_is')
 }
 prevBtn.addEventListener('click', prevSong);
 
 function updateProgress(e) {
     const {duration, currentTime} = e.srcElement;
-    //console.log(duration);
-    //console.log(currentTime);
     const progressPercent = (currentTime / duration) * 100;
     progressAll.forEach(progress =>{
         progress.style.width = `${progressPercent}%`;
@@ -154,7 +182,7 @@ function updateProgress(e) {
     })
 
 }
-audio.addEventListener('timeupdate', updateProgress);
+//audio.addEventListener('timeupdate', updateProgress);
 
 function setProgress(e) {
     const width = this.clientWidth;
@@ -174,34 +202,8 @@ function infinity() {
 
 //AutoPlay
 
-audio1.addEventListener('ended', infinity);
-audio2.addEventListener('ended', nextSong);
+//audio.addEventListener('ended', infinity);
+audio.addEventListener('ended', nextSong);
 
-/*playBtn.addEventListener('click', () => {
-    const isPlaying = player.classList.contains('_play');
-    if (isPlaying) {
-        pauseSong();
-       
-    } else {
-        playSong();
-    }
-});*/
-//Запуск через кнопку
-/*playBtn.forEach(function(item){
-    item.addEventListener('click', () => {
-        let isPlayings = player;
-        isPlayings.forEach( item => {
-            let isPlaying = item.classList.contains('_play');
-            console.log(item);
-            if (isPlaying) {
-                pauseSong(item);
-               
-            } else {
-                playSong(item);
-            }
-        })
-        
-    });
-});*/
 
     
