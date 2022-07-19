@@ -1,11 +1,11 @@
 const player1 = document.querySelector('.newSingle__body');
 const player2 = document.querySelector('.LastTracke__body');
-const playBtn = document.querySelectorAll('.plays');
+const playBtn = document.querySelectorAll('.playPause__item_play');
 const audio1 = document.querySelector('.newSingle__song');
 const audio = document.querySelector('.newSingle__song');
 const audio2 = document.querySelector('.LastTracke__song');
 const progressContainer = document.querySelector('.newSingle__bar ');
-const progressAll = document.querySelectorAll('.bar__progress');
+const progress = document.querySelectorAll('.bar__progress');
 const title = document.querySelector('.newSingle__songName');
 const cover = document.querySelector('.player__img');
 const imgSrcs = document.querySelectorAll('.Play');
@@ -45,13 +45,15 @@ const songsArray = ['Let me down slowly',
 //Пісня по умолчанію
 let songIndex = 0;
 //Init
-function loadSong(song) {
-    title.innerHTML = song;
+function loadSong(song, audio = audio1) {
+    if(audio === audio1){
+        title.innerHTML = song;
+    }
     audio.src = `music/${song}.mp3`;
 }  
 loadSong(songsArray[songIndex]);
 //Play
-function playSong(item) {
+function playSong() {
     /*audio.play();
     if (!(item === undefined)) {
         let imageScr = item.querySelector('.Play');
@@ -69,7 +71,7 @@ function playSong(item) {
 
 }
 //Pause
-function pauseSong(item) {
+function pauseSong() {
    /* //item.classList.remove('._play');
     audio.pause();
     if (!(item === undefined)) {
@@ -123,28 +125,38 @@ function nextSong() {
     weq.src = `images/newSingl/pause-solid.svg`;
     let qws = player2.querySelector('.plays')
     //let qwws = qws.classList.add('_is')*/
+
     songIndex++;
     if (songIndex > songsArray.length - 1){
         songIndex = 0;
     }
-    loadSong(songsArray[songIndex]);
+    loadSong(songsArray[songIndex], audio2);
+    let addPlayer2 = player2.classList.add('_is');
     playSong();
 
 }
 nextBtn.addEventListener('click', nextSong);
 
 function prevSong() {
-    songIndex--;
+    /*songIndex--;
     if (songIndex < 0) {
-        songIndex = songsArray.length - 1;
+        
     }
     loadSong(songsArray[songIndex]);
     let weq = player2.querySelector('.Play')
     console.log(weq);
-    audio.play();
+    audio2.play();
     weq.src = `images/newSingl/pause-solid.svg`;
     let qws = player2.querySelector('.plays')
-    //let qwws = qws.classList.add('_is')
+    //let qwws = qws.classList.add('_is')*/
+    songIndex--;
+    if (songIndex < 0){
+        songIndex = songsArray.length - 1;
+    }
+    loadSong(songsArray[songIndex], audio2);
+    let addPlayer2 = player2.classList.add('_is');
+    playSong();
+
 }
 prevBtn.addEventListener('click', prevSong);
 
@@ -182,7 +194,8 @@ function updateProgress(e) {
     })
 
 }
-//audio.addEventListener('timeupdate', updateProgress);
+audio1.addEventListener('timeupdate', updateProgress);
+audio2.addEventListener('timeupdate', updateProgress);
 
 function setProgress(e) {
     const width = this.clientWidth;
@@ -202,7 +215,7 @@ function infinity() {
 
 //AutoPlay
 
-//audio.addEventListener('ended', infinity);
+audio1.addEventListener('ended', infinity);
 audio.addEventListener('ended', nextSong);
 
 
