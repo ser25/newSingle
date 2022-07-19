@@ -5,9 +5,9 @@ const audio1 = document.querySelector('.newSingle__song');
 const audio = document.querySelector('.newSingle__song');
 const audio2 = document.querySelector('.LastTracke__song');
 const progressContainer = document.querySelector('.newSingle__bar ');
-const progress = document.querySelectorAll('.bar__progress');
+const progressAll = document.querySelectorAll('.bar__progress');
 const title = document.querySelector('.newSingle__songName');
-const cover = document.querySelector('.player__img');
+let cover = document.querySelector('[data-image]');
 const imgSrcs = document.querySelectorAll('.Play');
 const times = document.querySelectorAll('.time1');
 const timesFull = document.querySelectorAll('.time2');
@@ -20,7 +20,9 @@ const songsArray = ['Let me down slowly',
                       'Bad Habits',
                       'Don’t Call Me Angel',
                       'la di die'
-                    ];                
+                    ];
+const songsArray1 = ['Let me down slowly',
+                   ];                 
 
  function necessaryData(){
 
@@ -43,6 +45,7 @@ const songsArray = ['Let me down slowly',
 }
 
 //Пісня по умолчанію
+let songIndexSingle = songsArray.length - 1;
 let songIndex = 0;
 //Init
 function loadSong(song, audio = audio1) {
@@ -50,8 +53,13 @@ function loadSong(song, audio = audio1) {
         title.innerHTML = song;
     }
     audio.src = `music/${song}.mp3`;
-}  
-loadSong(songsArray[songIndex]);
+   /* cover.forEach(item => {
+        item.src = `images/lastTracks/songs/${songIndex + 1}.webp`;
+    });*/
+    cover.src = `images/lastTracks/songs/${songIndex + 1}.webp`;
+}
+
+loadSong(songsArray[songIndexSingle]);
 //Play
 function playSong() {
     /*audio.play();
@@ -61,12 +69,15 @@ function playSong() {
     };*/
     let necessaryPlayer1 = player1.classList.contains('_is');
     let necessaryPlayer2 = player2.classList.contains('_is');
+    let imgPlay = player1.querySelector('._img') || player2.querySelector('._img');
     if (necessaryPlayer1) {
         player1.classList.add('_play');
         audio1.play();
+        imgPlay.src = `images/newSingl/pause-solid.svg`;
     } else if(necessaryPlayer2){
         player2.classList.add('_play');
         audio2.play();
+        imgPlay.src = `images/newSingl/pause-solid.svg`;
     }
 
 }
@@ -80,14 +91,21 @@ function pauseSong() {
     }*/
     let necessaryPlayer1 = player1.classList.contains('_is');
     let necessaryPlayer2 = player2.classList.contains('_is');
+    let imgPlay = player1.querySelector('._img') || player2.querySelector('._img');
     if (necessaryPlayer1) {
         player1.classList.remove('_play');
         player1.classList.remove('_is');
+        
         audio1.pause();
+        imgPlay.src = `images/newSingl/play-solid.svg`;
+        imgPlay.classList.remove('_img');
     } else if(necessaryPlayer2){
         player2.classList.remove('_play');
         player2.classList.remove('_is');
+        
         audio2.pause();
+        imgPlay.src = `images/newSingl/play-solid.svg`;
+        imgPlay.classList.remove('_img');
     }
 }
 //Start
@@ -103,7 +121,8 @@ playBtn.forEach(function(item){
         //isPlayer = isPlayer.closest('.LastTracke__body') || isPlayer.closest('.newSingle__body');
         let isPlaying = isPlayer.classList.contains('_play');
         let necessaryBtn = isPlayer.classList.add('_is');
-        console.log(isPlayer);
+        let isBtn = item.querySelector('.Play');
+        isBtn = isBtn.classList.add('_img');
         if (isPlaying) {
             pauseSong();
         } else {
@@ -127,11 +146,13 @@ function nextSong() {
     //let qwws = qws.classList.add('_is')*/
 
     songIndex++;
-    if (songIndex > songsArray.length - 1){
+    if (songIndex > songsArray.length - 2){
         songIndex = 0;
     }
     loadSong(songsArray[songIndex], audio2);
     let addPlayer2 = player2.classList.add('_is');
+    let addImg = player2.querySelector('.Play')
+    addImg = addImg.classList.add('_img');
     playSong();
 
 }
@@ -151,10 +172,12 @@ function prevSong() {
     //let qwws = qws.classList.add('_is')*/
     songIndex--;
     if (songIndex < 0){
-        songIndex = songsArray.length - 1;
+        songIndex = songsArray.length - 2;
     }
     loadSong(songsArray[songIndex], audio2);
     let addPlayer2 = player2.classList.add('_is');
+    let addImg = player2.querySelector('.Play')
+    addImg = addImg.classList.add('_img');
     playSong();
 
 }
@@ -200,15 +223,15 @@ audio2.addEventListener('timeupdate', updateProgress);
 function setProgress(e) {
     const width = this.clientWidth;
     const clickX = e.offsetX;
-    const duration = audio.duration;
+    const duration = audio1.duration;
 
-    audio.currentTime = (clickX / width) * duration;
+    audio1.currentTime = (clickX / width) * duration;
 
 }
 progressContainer.addEventListener('click', setProgress);
 
 function infinity() {
-    songIndex = 0;
+    songIndex = songsArray.length -1;
     loadSong(songsArray[songIndex]);
     playSong();
 }
