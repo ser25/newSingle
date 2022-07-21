@@ -194,10 +194,11 @@ function setProgress(e) {
 
     audio.currentTime = (clickX / width) * duration;
     offPlayer2OnPlayer1();
+    offPlayer1OnPlayer2();
     let addPlayer = isPlayer.classList.add('_is');
     let addImg = isPlayer.querySelector('.Play')
     addImg = addImg.classList.add('_img');
-    offPlayer1OnPlayer2();
+    
     playSong();
 }
 progressContainer.forEach(function(item){
