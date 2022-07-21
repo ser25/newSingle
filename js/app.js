@@ -2,10 +2,12 @@ const player1 = document.querySelector('.newSingle__body');
 const player2 = document.querySelector('.LastTracke__body');
 const playBtn = document.querySelectorAll('.playPause__item_play');
 const audio1 = document.querySelector('.newSingle__song');
-const audio = document.querySelector('.newSingle__song');
+//const audio = document.querySelector('.newSingle__song');
 const audio2 = document.querySelector('.LastTracke__song');
-const progressContainer = document.querySelector('.newSingle__bar ');
-const progressAll = document.querySelectorAll('.bar__progress');
+const progressContainerNewSingle = document.querySelector('.newSingle__bar ');
+const progressContainerLastTracke = document.querySelector('.LastTracke__bar ');
+const progressNewSingle = document.querySelector('.bar__progress_newSingle');
+const progressLastTracke = document.querySelector('.bar__progress_LastTracke');
 const title = document.querySelector('.newSingle__songName');
 let cover = document.querySelector('[data-image]');
 const imgSrcs = document.querySelectorAll('.Play');
@@ -24,24 +26,21 @@ const songsArray = ['Let me down slowly',
 const songsArray1 = ['Let me down slowly',
                    ];                 
 
- function necessaryData(){
-
-    let isPlayer = item.closest('.plays');
-    isPlayer = isPlayer.closest('.LastTracke__body') || isPlayer.closest('.newSingle__body');
-    if(isPlayer === player1 ){
-        // player1
-        let audio = audio1;
-        console.log(audio);
-        //playSong(item, audio);
-        return audio
-
-    } else if (isPlayer === player2) {
-        // player2
-        let audio = audio2;
-        return audio
+function offPlayer1OnPlayer2(){
+    let a = player1.classList.contains('_is');
+    let b = player1.classList.contains('_play');
+    if (a && b) {
+        pauseSong();
+    } else{
+        playSong()
     }
-    
-
+}
+function offPlayer2OnPlayer1(){
+    let a = player2.classList.contains('_is');
+    let b = player2.classList.contains('_play');
+    if (a && b) {
+        pauseSong();
+    }
 }
 
 //Пісня по умолчанію
@@ -53,20 +52,12 @@ function loadSong(song, audio = audio1) {
         title.innerHTML = song;
     }
     audio.src = `music/${song}.mp3`;
-   /* cover.forEach(item => {
-        item.src = `images/lastTracks/songs/${songIndex + 1}.webp`;
-    });*/
     cover.src = `images/lastTracks/songs/${songIndex + 1}.webp`;
 }
 
 loadSong(songsArray[songIndexSingle]);
 //Play
 function playSong() {
-    /*audio.play();
-    if (!(item === undefined)) {
-        let imageScr = item.querySelector('.Play');
-        imageScr.src = `images/newSingl/pause-solid.svg`; 
-    };*/
     let necessaryPlayer1 = player1.classList.contains('_is');
     let necessaryPlayer2 = player2.classList.contains('_is');
     let imgPlay = player1.querySelector('._img') || player2.querySelector('._img');
@@ -83,49 +74,40 @@ function playSong() {
 }
 //Pause
 function pauseSong() {
-   /* //item.classList.remove('._play');
-    audio.pause();
-    if (!(item === undefined)) {
-        let imageScr = item.querySelector('.Play');
-        imageScr.src = `images/newSingl/play-solid.svg`;
-    }*/
     let necessaryPlayer1 = player1.classList.contains('_is');
     let necessaryPlayer2 = player2.classList.contains('_is');
     let imgPlay = player1.querySelector('._img') || player2.querySelector('._img');
     if (necessaryPlayer1) {
         player1.classList.remove('_play');
         player1.classList.remove('_is');
-        
-        audio1.pause();
+
         imgPlay.src = `images/newSingl/play-solid.svg`;
         imgPlay.classList.remove('_img');
+        audio1.pause();
     } else if(necessaryPlayer2){
         player2.classList.remove('_play');
         player2.classList.remove('_is');
-        
-        audio2.pause();
+
         imgPlay.src = `images/newSingl/play-solid.svg`;
         imgPlay.classList.remove('_img');
+        audio2.pause();
     }
 }
 //Start
 playBtn.forEach(function(item){
-    item.addEventListener('click', () => {
-       /* let necessaryBtn = item.classList.toggle('_is'); 
-        if (necessaryBtn) {
-            playSong(item);
-        } else {
-            pauseSong(item);
-        }*/
-        let isPlayer = item.closest('.LastTracke__body') || item.closest('.newSingle__body');
-        //isPlayer = isPlayer.closest('.LastTracke__body') || isPlayer.closest('.newSingle__body');
+    item.addEventListener('click', function()  {
+      
+        let isPlayer = item.closest('.newSingle__body') || item.closest('.LastTracke__body');
         let isPlaying = isPlayer.classList.contains('_play');
+        offPlayer2OnPlayer1();
         let necessaryBtn = isPlayer.classList.add('_is');
         let isBtn = item.querySelector('.Play');
         isBtn = isBtn.classList.add('_img');
+
         if (isPlaying) {
             pauseSong();
         } else {
+            offPlayer1OnPlayer2();
             playSong();
         }
     });
@@ -133,23 +115,12 @@ playBtn.forEach(function(item){
 
 
 function nextSong() {
-    /*songIndex++;
-    if (songIndex > songsArray.length - 1){
-        songIndex = 0;
-    }
-    loadSong(songsArray[songIndex]);
-    let weq = player2.querySelector('.Play')
-    console.log(weq);
-    audio2.play
-    weq.src = `images/newSingl/pause-solid.svg`;
-    let qws = player2.querySelector('.plays')
-    //let qwws = qws.classList.add('_is')*/
-
     songIndex++;
     if (songIndex > songsArray.length - 2){
         songIndex = 0;
     }
     loadSong(songsArray[songIndex], audio2);
+    offPlayer1OnPlayer2();
     let addPlayer2 = player2.classList.add('_is');
     let addImg = player2.querySelector('.Play')
     addImg = addImg.classList.add('_img');
@@ -159,22 +130,12 @@ function nextSong() {
 nextBtn.addEventListener('click', nextSong);
 
 function prevSong() {
-    /*songIndex--;
-    if (songIndex < 0) {
-        
-    }
-    loadSong(songsArray[songIndex]);
-    let weq = player2.querySelector('.Play')
-    console.log(weq);
-    audio2.play();
-    weq.src = `images/newSingl/pause-solid.svg`;
-    let qws = player2.querySelector('.plays')
-    //let qwws = qws.classList.add('_is')*/
     songIndex--;
     if (songIndex < 0){
         songIndex = songsArray.length - 2;
     }
     loadSong(songsArray[songIndex], audio2);
+    offPlayer1OnPlayer2();
     let addPlayer2 = player2.classList.add('_is');
     let addImg = player2.querySelector('.Play')
     addImg = addImg.classList.add('_img');
@@ -183,12 +144,10 @@ function prevSong() {
 }
 prevBtn.addEventListener('click', prevSong);
 
-function updateProgress(e) {
+function updateProgress(e, progress, time) {
     const {duration, currentTime} = e.srcElement;
     const progressPercent = (currentTime / duration) * 100;
-    progressAll.forEach(progress =>{
-        progress.style.width = `${progressPercent}%`;
-    });
+    progress.style.width = `${progressPercent}%`;
     //Minutes
     let minutes = Math.floor(audio.currentTime / 60);
     let minutesFull = Math.floor(audio.duration / 60);
@@ -207,16 +166,13 @@ function updateProgress(e) {
     if (secondsFull < 10 ) {
         secondsFull = '0' + String(secondsFull);    
     }
-    times.forEach(time =>{
-        time.innerHTML =`${minutes}:${seconds}`;
-    })
-    timesFull.forEach(timeFull => {
-        if(!isNaN(minutesFull) && !isNaN(secondsFull)) {
+    time.innerHTML =`${minutes}:${seconds}`;
+    if(!isNaN(minutesFull) && !isNaN(secondsFull)) {
             timeFull.innerHTML =`${minutesFull}:${secondsFull}`;
-        }
-    })
+    }
 
 }
+updateProgress(progressContainerNewSingle, progressNewSingle);
 audio1.addEventListener('timeupdate', updateProgress);
 audio2.addEventListener('timeupdate', updateProgress);
 
@@ -239,7 +195,7 @@ function infinity() {
 //AutoPlay
 
 audio1.addEventListener('ended', infinity);
-audio.addEventListener('ended', nextSong);
+audio2.addEventListener('ended', nextSong);
 
 
     
