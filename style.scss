@@ -641,6 +641,10 @@ body{
     }
 
     &__time {
+        @media (min-width: 1100px){
+            width: 122px;   
+        }
+        
         display: flex;
         justify-content: space-between;
 
@@ -690,10 +694,12 @@ body{
 }
 .item-trackes {
     display: flex;
+    gap: 17px;
 
 
     &__number {
-        margin-right: 17px;
+       //margin-right: 17px;
+        
     }
 
     &__nameSong {

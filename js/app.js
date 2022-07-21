@@ -21,10 +21,9 @@ const songsArray = ['Let me down slowly',
                       'Another love',
                       'Bad Habits',
                       'Don’t Call Me Angel',
-                      'la di die'
+                      'la di die',
+                      'E.T.'
                     ];
-const songsArray1 = ['Let me down slowly',
-                   ];                 
 
 function offPlayer1OnPlayer2(){
     let a = player1.classList.contains('_is');
@@ -47,15 +46,18 @@ function offPlayer2OnPlayer1(){
 let songIndexSingle = songsArray.length - 1;
 let songIndex = 0;
 //Init
-function loadSong(song, audio = audio1) {
+function loadSong(song, songIndex, audio = audio1) {
     if(audio === audio1){
         title.innerHTML = song;
     }
     audio.src = `music/${song}.mp3`;
-    cover.src = `images/lastTracks/songs/${songIndex + 1}.webp`;
+    if (audio === audio2){
+        cover.src = `images/lastTracks/songs/${songIndex + 1}.webp`;
+    }
+    
 }
 
-loadSong(songsArray[songIndexSingle]);
+loadSong(songsArray[songIndexSingle], songIndex);
 //Play
 function playSong() {
     let necessaryPlayer1 = player1.classList.contains('_is');
@@ -122,13 +124,13 @@ function nextSong() {
     if (songIndex > songsArray.length - 2){
         songIndex = 0;
     }
-    loadSong(songsArray[songIndex], audio2);
+    loadSong(songsArray[songIndex],songIndex, audio2);
     offPlayer1OnPlayer2();
     let addPlayer2 = player2.classList.add('_is');
     let addImg = player2.querySelector('.Play')
     addImg = addImg.classList.add('_img');
     playSong();
-
+    
 }
 nextBtn.addEventListener('click', nextSong);
 
@@ -137,7 +139,7 @@ function prevSong() {
     if (songIndex < 0){
         songIndex = songsArray.length - 2;
     }
-    loadSong(songsArray[songIndex], audio2);
+    loadSong(songsArray[songIndex], songIndex, audio2);
     offPlayer1OnPlayer2();
     let addPlayer2 = player2.classList.add('_is');
     let addImg = player2.querySelector('.Play')
@@ -151,9 +153,7 @@ function updateProgress(e) {
     const {duration, currentTime} = e.srcElement;
     const progressPercent = (currentTime / duration) * 100;
     let necessaryPlayer = this.closest('[data-body]');
-    console.log(necessaryPlayer);
     let progress = necessaryPlayer.querySelector('.bar__progress');
-    //console.log(progress)
     progress.style.width = `${progressPercent}%`;
     //Minutes
     let minutes = Math.floor(this.currentTime / 60);
@@ -211,5 +211,58 @@ function infinity() {
     loadSong(songsArray[songIndex]);
     playSong();
 }
+function addColor(el, songIndex) {
+    console.log(songIndex);
+    if (!(songIndex === undefined)){
+        let a = songsArray[songIndex];
+        let b = document.querySelectorAll('.trackes__item');
+        b = Array.from(b);
+        console.log(b);
+        
+    }
+
+    let findUl = el.closest('ul');
+    let backItemWithColor = findUl.querySelector('._color')
+    if (backItemWithColor){
+        let backSong = backItemWithColor.querySelector('.item-trackes__nameSong');
+        let backNumber = backItemWithColor.querySelector('.item-trackes__number');
+        backSong.style.color = '';
+        backNumber.style.color = '';
+        backItemWithColor.classList.remove('_color')
+
+    }
+    el.classList.add('_color')
+    let numberSong = el.querySelector('.item-trackes__number');
+    let nameSong = el.querySelector('.item-trackes__nameSong');
+    nameSong.style.color = '#7A66CC';
+    numberSong.style.color = '#7A66CC';
+}
+
+function clickList(e){
+    let el = e.target.closest('li');;
+
+    if(!el) return;
+
+    if(!listSongs.contains(el)) return;
+
+    clickNameSong(el);
+}
+function clickNameSong(el){
+    let nameSong = el.querySelector('.item-trackes__nameSong');
+    let name = nameSong.innerHTML;
+    const nameIndex = songsArray.indexOf(name);
+    offPlayer2OnPlayer1();
+    offPlayer1OnPlayer2();
+    let isPlayer = player2.classList.add('_is')
+    let addImg = player2.querySelector('.Play')
+    addImg = addImg.classList.add('_img');
+    loadSong(songsArray[nameIndex], nameIndex, audio2);
+
+    addColor(el);
+    playSong();
+   
+}
+const listSongs = document.querySelector('.trackes__list');
+listSongs.addEventListener('click', clickList);
 
     
