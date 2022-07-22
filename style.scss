@@ -542,6 +542,9 @@ body{
         @media (min-width:1100px){
             grid-template-columns: repeat(2, minmax(290px, 1fr));
         }
+        @media (max-width: 1099.97px){
+            @include adaptivValue(gap, 60, 20);  
+        }
     }
 
     &__images {
@@ -560,6 +563,18 @@ body{
         }   
 
 
+    }
+    &__cover{
+        @media (min-width:1100px){
+              display: none;
+
+        }
+        display: flex;
+        margin-top: 40px;
+        justify-content: center;
+        align-items: center;
+        color: $Purple;
+        //opacity: 0.7;
     }
 
     &__content {

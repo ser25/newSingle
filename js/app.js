@@ -16,6 +16,7 @@ const timeFull = document.querySelectorAll('.time2');
 const nextBtn = document.querySelector('.playPause__item_2');
 const prevBtn = document.querySelector('.playPause__item_1');
 const listSongs = document.querySelector('.trackes__list');
+const coverlastTracke = document.querySelector('.lastTracke__cover');
 //Назви пісень
 const songsArray = ['Let me down slowly',
                      'Summertime Sadness',
@@ -54,6 +55,7 @@ function loadSong(song, songIndex, audio = audio1) {
     audio.src = `music/${song}.mp3`;
     if (audio === audio2){
         cover.src = `images/lastTracks/songs/${songsArray[songIndex]}.webp`;
+        coverlastTracke.innerHTML = song;
     }
     
 }

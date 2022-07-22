@@ -570,6 +570,12 @@ body {
   }
 }
 
+@media (max-width: 1099.97px) {
+  .lastTracke__container {
+    gap: calc(20px + 40 * ((100vw - 320px) / 820));
+  }
+}
+
 .lastTracke__images {
   text-align: center;
   padding-top: 37px;
@@ -580,6 +586,26 @@ body {
   max-height: 100%;
   border: 18px solid #7A66CC;
   outline: 18px solid rgba(122, 102, 204, 0.3);
+}
+
+.lastTracke__cover {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 40px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #7A66CC;
+}
+
+@media (min-width: 1100px) {
+  .lastTracke__cover {
+    display: none;
+  }
 }
 
 @media (max-width: 1099.97px) {
