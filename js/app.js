@@ -15,6 +15,7 @@ const time = document.querySelectorAll('.time1');
 const timeFull = document.querySelectorAll('.time2');
 const nextBtn = document.querySelector('.playPause__item_2');
 const prevBtn = document.querySelector('.playPause__item_1');
+const listSongs = document.querySelector('.trackes__list');
 //Назви пісень
 const songsArray = ['Let me down slowly',
                      'Summertime Sadness',
@@ -41,23 +42,23 @@ function offPlayer2OnPlayer1(){
         pauseSong();
     }
 }
-
 //Пісня по умолчанію
 let songIndexSingle = songsArray.length - 1;
 let songIndex = 0;
 //Init
+addColor(document.querySelector('.trackes__item'));
 function loadSong(song, songIndex, audio = audio1) {
     if(audio === audio1){
         title.innerHTML = song;
     }
     audio.src = `music/${song}.mp3`;
     if (audio === audio2){
-        cover.src = `images/lastTracks/songs/${songIndex + 1}.webp`;
+        cover.src = `images/lastTracks/songs/${songsArray[songIndex]}.webp`;
     }
     
 }
 
-loadSong(songsArray[songIndexSingle], songIndex);
+loadSong(songsArray[songIndexSingle]);
 //Play
 function playSong() {
     let necessaryPlayer1 = player1.classList.contains('_is');
@@ -75,8 +76,8 @@ function playSong() {
         imgPlay.src = `images/newSingl/pause-solid.svg`;
         audio2.addEventListener('timeupdate', updateProgress);
         audio2.addEventListener('ended', nextSong);
-    }
-
+        
+    }    
 }
 //Pause
 function pauseSong() {
@@ -117,9 +118,39 @@ playBtn.forEach(function(item){
         }
     });
 });
-
-
+/*function findItem2(){
+    let nameSong = songsArray[songIndex];
+    let trackes = listSongs.querySelectorAll('.item-trackes__nameSong');
+    let arr = Array.from(trackes).filter(function(item){
+        let bvc = item.innerHTML;
+        if(nameSong == bvc){
+            return item
+        }
+    });
+    let trackeName = arr[0];
+    let itemTracke = trackeName.closest('.trackes__item');
+    itemTracke.setAttribute('data-color', songIndex);
+    addColor(itemTracke);
+}*/
+function findItem(nameSong) {
+    let indexSong = songsArray.indexOf(nameSong);
+    let trackes = listSongs.querySelectorAll('.item-trackes__nameSong');
+    let arr = Array.from(trackes).filter(function(item){
+        let bvc = item.innerHTML;
+        if(nameSong == bvc){
+            return item
+        }
+    });
+    let trackeName = arr[0];
+    let itemTracke = trackeName.closest('.trackes__item');
+    itemTracke.setAttribute('data-color', indexSong);
+    addColor(itemTracke);
+}
 function nextSong() {
+    let tracke =  listSongs.querySelector('.trackes__item._color');
+    if(tracke) {
+        songIndex = tracke.getAttribute('data-color');
+    }
     songIndex++;
     if (songIndex > songsArray.length - 2){
         songIndex = 0;
@@ -129,12 +160,17 @@ function nextSong() {
     let addPlayer2 = player2.classList.add('_is');
     let addImg = player2.querySelector('.Play')
     addImg = addImg.classList.add('_img');
+    findItem(songsArray[songIndex])
     playSong();
-    
 }
 nextBtn.addEventListener('click', nextSong);
 
 function prevSong() {
+    let tracke =  listSongs.querySelector('.trackes__item._color');
+    if(tracke) {
+        songIndex = tracke.getAttribute('data-color');
+    }
+
     songIndex--;
     if (songIndex < 0){
         songIndex = songsArray.length - 2;
@@ -145,7 +181,7 @@ function prevSong() {
     let addImg = player2.querySelector('.Play')
     addImg = addImg.classList.add('_img');
     playSong();
-
+    findItem(songsArray[songIndex])
 }
 prevBtn.addEventListener('click', prevSong);
 
@@ -211,26 +247,22 @@ function infinity() {
     loadSong(songsArray[songIndex]);
     playSong();
 }
-function addColor(el, songIndex) {
-    console.log(songIndex);
-    if (!(songIndex === undefined)){
-        let a = songsArray[songIndex];
-        let b = document.querySelectorAll('.trackes__item');
-        b = Array.from(b);
-        console.log(b);
-        
-    }
-
-    let findUl = el.closest('ul');
-    let backItemWithColor = findUl.querySelector('._color')
+function delateColoraAndDataset(){
+    let backItemWithColor = listSongs.querySelector('._color')
     if (backItemWithColor){
+        let backItemWithDataset =  backItemWithColor.hasAttribute('data-color');
         let backSong = backItemWithColor.querySelector('.item-trackes__nameSong');
         let backNumber = backItemWithColor.querySelector('.item-trackes__number');
         backSong.style.color = '';
         backNumber.style.color = '';
         backItemWithColor.classList.remove('_color')
-
+        if (backItemWithDataset){
+            backItemWithColor.removeAttribute('data-color');
+        }
     }
+}
+function addColor(el, songIndex) {
+    delateColoraAndDataset();
     el.classList.add('_color')
     let numberSong = el.querySelector('.item-trackes__number');
     let nameSong = el.querySelector('.item-trackes__nameSong');
@@ -239,8 +271,8 @@ function addColor(el, songIndex) {
 }
 
 function clickList(e){
-    let el = e.target.closest('li');;
-
+    
+    let el = e.target.closest('li');
     if(!el) return;
 
     if(!listSongs.contains(el)) return;
@@ -250,19 +282,21 @@ function clickList(e){
 function clickNameSong(el){
     let nameSong = el.querySelector('.item-trackes__nameSong');
     let name = nameSong.innerHTML;
-    const nameIndex = songsArray.indexOf(name);
+    let nameIndex = songsArray.indexOf(name);
     offPlayer2OnPlayer1();
     offPlayer1OnPlayer2();
     let isPlayer = player2.classList.add('_is')
     let addImg = player2.querySelector('.Play')
     addImg = addImg.classList.add('_img');
     loadSong(songsArray[nameIndex], nameIndex, audio2);
-
-    addColor(el);
+    addColor(el,nameIndex);
+    
     playSong();
-   
+    el.setAttribute('data-color', nameIndex);
 }
-const listSongs = document.querySelector('.trackes__list');
 listSongs.addEventListener('click', clickList);
 
-    
+
+
+
+
