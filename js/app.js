@@ -299,6 +299,22 @@ function clickNameSong(el){
 listSongs.addEventListener('click', clickList);
 
 
+function scrollToImg(){
+    let Trackesgotos = listSongs.querySelectorAll('[data-goto]');
+    if(Trackesgotos.length > 0) {
+        Trackesgotos.forEach(Trackegoto => {
+            Trackegoto.addEventListener('click', function(e){
+                const tracke = e.target;
+                let trackes = tracke.closest('.item-trackes')
+                if(trackes.dataset.goto && document.querySelector(trackes.dataset.goto)){
+                    const gotoBlock = document.querySelector(trackes.dataset.goto);
+                    gotoBlock.scrollIntoView({ behavior: "smooth"});
+                }
+            });
+        });
 
+    }
+}
+scrollToImg();
 
 

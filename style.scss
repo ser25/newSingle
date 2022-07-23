@@ -673,8 +673,10 @@ body{
 .Play {
     width: 25px;
     height: 40px;
+    cursor: pointer;
 }
 .bar {
+    cursor: pointer;
 
 
 
@@ -708,6 +710,7 @@ body{
     }
 }
 .item-trackes {
+    cursor: pointer;
     display: flex;
     gap: 17px;
 
