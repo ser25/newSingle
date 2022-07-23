@@ -308,7 +308,13 @@ function scrollToImg(){
                 let trackes = tracke.closest('.item-trackes')
                 if(trackes.dataset.goto && document.querySelector(trackes.dataset.goto)){
                     const gotoBlock = document.querySelector(trackes.dataset.goto);
-                    gotoBlock.scrollIntoView({ behavior: "smooth"});
+                    let widthDoc = document.documentElement.clientWidth;
+                    if (widthDoc < 1100){
+                        gotoBlock.scrollIntoView({ behavior: "smooth"});
+                    } else{
+                        gotoBlock.scrollIntoView({block: "center", behavior: "smooth"});
+                    }
+                   
                 }
             });
         });
